@@ -8,7 +8,7 @@
 #let author = "lzy"
 #let members = (
   (name: "lzy", id: "22090x00x1"),
-  (name: "李明", id: "22090x0042"),
+  (name: "李明", id: "22090x00x2"),
 )
 #let pairMembers = none
 #let date = datetime(
