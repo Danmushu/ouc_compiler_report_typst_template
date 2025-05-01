@@ -11,11 +11,12 @@
 #let assign_cover(title, subTitles ,members, pairMembers, date) = {
   align(
     center,
-    text(size: 40pt, weight: "bold")[
+    text(size: 48pt, weight: "bold")[
       #v(3em)
       编译原理实验报告
     ],
   )
+  v(2em)
   align(
     left,
     grid(
@@ -25,7 +26,7 @@
         left,
         (
           for sub in subTitles {
-            text(size: 26pt)[
+            text(size: 20pt)[
               #sub.name: #sub.content
 
             ]
@@ -96,7 +97,7 @@
   align(center, text(28pt, weight: "bold")[实验目录])
   v(15pt)
   
-  outline(title: none, depth:1, indent: auto)
+  outline(title: none, depth:2, indent: auto)
 }
 
 #let assign_class(title, subTitle ,author, members, pairMembers, date, body) = {
@@ -208,10 +209,13 @@
   show raw.where(block: true): it => it + fakepar
   body
 }
-
+#let problem_counter = counter("problem")
+#let prob_solution_counter = counter("prob-solution")
 #let my_heading(title) = {
   pagebreak()
   counter(heading).update(0)
+  prob_solution_counter.update(0)
+  problem_counter.update(0)
   show heading: it => {
     set align(center)
     set text(size: 21pt, weight: "bold")
@@ -233,9 +237,6 @@
 }
 
 
-
-#let problem_counter = counter("problem")
-#let prob-solution_counter = counter("prob-solution")
 #let prob_block(body) = {
   v(-0.5em)
   block(fill: rgb(230, 255, 255), width: 100%, inset: 8pt, radius: 4pt, stroke: rgb(0, 191, 255), body)
@@ -255,3 +256,21 @@
   }
 }
 
+#let information = counter("information")
+#let info_block(body) = {
+  v(-0.5em)
+  block(fill: rgb("#ffffff"), width: 100%, inset: 8pt, radius: 4pt, stroke: rgb("#004979"), body)
+}
+#let info(text, body) = {
+  [
+    #set heading(numbering: none)
+    #information.step()
+    === *重点 #context information.display("1")*: #text
+  ]
+  v(0.5em)
+  if body == [] {
+    v(0.5em)
+  } else {
+    info_block(body)
+  }
+}
